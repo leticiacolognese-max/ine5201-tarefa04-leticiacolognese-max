@@ -46,6 +46,17 @@ def formatar_nome(nome):
     )
 
 
+def formatar_data(data):
+    digitos = "".join(caractere for caractere in data if caractere.isdigit())
+    digitos = digitos[:8]
+
+    if len(digitos) > 4:
+        return f"{digitos[:2]}/{digitos[2:4]}/{digitos[4:]}"
+    if len(digitos) > 2:
+        return f"{digitos[:2]}/{digitos[2:]}"
+    return digitos
+
+
 def listar_alunos(busca=""):
     with conectar() as conexao:
         if busca:
@@ -138,7 +149,9 @@ def criar_janela():
          sg.Input(key="-ENDERECO-", size=(31, 1))],
         [sg.Text("Data de nascimento", size=(18, 1)),
          sg.Input(key="-DATA-", size=(31, 1),
-                  tooltip="Formato: DD/MM/AAAA")],
+                  enable_events=True,
+                  tooltip="Formato: DD/MM/AAAA",
+                  justification="left")],
     ]
 
     botoes = [
@@ -261,6 +274,11 @@ def main():
             )
             if texto_filtrado != values["-NOME-"]:
                 window["-NOME-"].update(texto_filtrado)
+
+        elif event == "-DATA-":
+            texto_formatado = formatar_data(values["-DATA-"])
+            if texto_formatado != values["-DATA-"]:
+                window["-DATA-"].update(texto_formatado)
 
         elif event == "-TABELA-":
             linhas = values["-TABELA-"]
