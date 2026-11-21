@@ -2,6 +2,11 @@
 
 Sistema gráfico CRUD desenvolvido em Python para cadastrar, consultar, alterar e excluir alunos. Os dados ficam armazenados localmente em um banco SQLite.
 
+## Autoras
+
+- Karoline de Quadros Correia
+- Letícia Olivo Colognese
+
 ## Funcionalidades
 
 - Cadastro de alunos
